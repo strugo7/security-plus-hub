@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 const domains = [
     {
@@ -76,7 +75,6 @@ const recentTopics = [
 ];
 
 const Dashboard: React.FC = () => {
-    const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState('');
 
     const overallProgress = Math.round(
