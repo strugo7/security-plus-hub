@@ -1,0 +1,36 @@
+export const routes = {
+    HOME: '/',
+    LOADING: '/loading',
+    DASHBOARD: '/dashboard',
+    SECTIONS: {
+        BASE: '/sections',
+        SECTION_1: '/sections/1',
+        SECTION_2: '/sections/2',
+        SECTION_3: '/sections/3',
+        SECTION_4: '/sections/4',
+        SECTION_5: '/sections/5',
+    },
+    SECOPS: {
+        INDEX: '/secops',
+        SIEM: '/secops/siem',
+        IR: '/secops/ir',
+        NETWORK: '/secops/network-security',
+        ENDPOINT: '/secops/endpoint-security',
+        EMAIL: '/secops/email-security',
+        SCRIPTING: '/secops/scripting',
+        CLOUD: '/secops/cloud-security',
+        MITRE: '/secops/mitre-attack',
+    },
+    PRACTICE: {
+        INDEX: '/practice',
+        QUIZ: '/practice/quiz',
+        FULL_EXAM: '/practice/full-exam',
+        FLASHCARDS: '/practice/flashcards',
+        WEAK_AREAS: '/practice/weak-areas',
+    },
+    RESOURCES: {
+        GLOSSARY: '/resources/glossary',
+        LEARNING_PATHS: '/resources/learning-paths',
+        TOOLS: '/resources/tools',
+    },
+};

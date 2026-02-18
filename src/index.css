@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&family=Fira+Code&display=swap');
+
+/* RTL Base */
+html {
+  direction: rtl;
+}
+
+/* LTR for code blocks */
+pre, code, .ltr {
+  direction: ltr;
+  text-align: left;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 4px;
+}
+
+/* Dark mode default */
+body {
+  @apply bg-slate-900 text-slate-100;
+}
+
+/* Stitch Design Custom Styles */
+.scanlines {
+  background: linear-gradient(
+      to bottom,
+      rgba(255,255,255,0),
+      rgba(255,255,255,0) 50%,
+      rgba(0,0,0,0.2) 50%,
+      rgba(0,0,0,0.2)
+  );
+  background-size: 100% 4px;
+  z-index: 50;
+  pointer-events: none;
+}
+
+.crt-flicker {
+  animation: flicker 0.15s infinite;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(18, 16, 16, 0.1);
+  opacity: 0;
+  z-index: 40;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.02; }
+  5% { opacity: 0.05; }
+  10% { opacity: 0.02; }
+  15% { opacity: 0.06; }
+  20% { opacity: 0.02; }
+  25% { opacity: 0.02; }
+  30% { opacity: 0.02; }
+  35% { opacity: 0.01; }
+  40% { opacity: 0.02; }
+  45% { opacity: 0.02; }
+  50% { opacity: 0.02; }
+  55% { opacity: 0.02; }
+  60% { opacity: 0.02; }
+  65% { opacity: 0.02; }
+  70% { opacity: 0.01; }
+  75% { opacity: 0.02; }
+  80% { opacity: 0.02; }
+  85% { opacity: 0.02; }
+  90% { opacity: 0.02; }
+  95% { opacity: 0.02; }
+  100% { opacity: 0.02; }
+}
+
+.terminal-text {
+  text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+}
+
+.cyan-glow {
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+}
+
+.gauge-circle {
+  transition: stroke-dashoffset 1s ease-out;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+.radar-bg {
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+.radar-shape {
+  clip-path: polygon(50% 10%, 90% 30%, 85% 70%, 50% 90%, 20% 65%, 15% 30%);
+  animation: radarPulse 4s infinite alternate;
+}
+
+@keyframes radarPulse {
+  0% { opacity: 0.6; transform: scale(0.98); }
+  100% { opacity: 0.8; transform: scale(1.02); }
+}
+
+/* Material Symbols Fill for Dashboard */
+.material-symbols-outlined.filled {
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
