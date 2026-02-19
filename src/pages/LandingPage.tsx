@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const LandingPage: React.FC = () => {
     const navigate = useNavigate();
+    const { login } = useAuth();
     const [showButton, setShowButton] = useState(false);
 
     useEffect(() => {
@@ -12,6 +14,11 @@ const LandingPage: React.FC = () => {
         }, 2500);
         return () => clearTimeout(timer);
     }, []);
+
+    const handleEnter = async () => {
+        await login('cadet@cyberguard.com', 'demo123');
+        navigate('/loading');
+    };
 
     return (
         <div className="bg-black text-green-500 font-mono antialiased h-screen overflow-hidden flex flex-col relative selection:bg-green-900 selection:text-white" dir="ltr">
@@ -97,7 +104,7 @@ const LandingPage: React.FC = () => {
                     {/* Enter Button */}
                     <div className={`mt-12 transition-opacity duration-1000 ${showButton ? 'opacity-100' : 'opacity-0'}`}>
                         <button
-                            onClick={() => navigate('/loading')}
+                            onClick={handleEnter}
                             className="px-12 py-4 bg-primary/20 hover:bg-primary/40 text-primary border border-primary/50 hover:border-primary rounded font-mono text-xl tracking-widest uppercase transition-all shadow-[0_0_20px_rgba(13,166,242,0.3)] hover:shadow-[0_0_40px_rgba(13,166,242,0.6)]"
                         >
                             Enter System
