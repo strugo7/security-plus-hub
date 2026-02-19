@@ -10,9 +10,10 @@ import AppHeader from '../shared/AppHeader';
 interface AppLayoutProps {
     children: React.ReactNode;
     searchPlaceholder?: string;
+    hideSidebar?: boolean;
 }
 
-const AppLayout: React.FC<AppLayoutProps> = ({ children, searchPlaceholder }) => {
+const AppLayout: React.FC<AppLayoutProps> = ({ children, searchPlaceholder, hideSidebar }) => {
     return (
         <div
             className="min-h-screen flex flex-col"
@@ -20,9 +21,13 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children, searchPlaceholder }) =>
             dir="ltr"
         >
             <AppHeader searchPlaceholder={searchPlaceholder} />
-            <main className="flex-1 w-full max-w-screen-xl mx-auto px-6 md:px-10 py-8">
-                {children}
-            </main>
+            {hideSidebar ? (
+                children
+            ) : (
+                <main className="flex-1 w-full max-w-screen-xl mx-auto px-6 md:px-10 py-8">
+                    {children}
+                </main>
+            )}
         </div>
     );
 };
