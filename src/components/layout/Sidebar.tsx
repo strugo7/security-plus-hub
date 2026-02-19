@@ -23,11 +23,12 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, closeMobileWrapper }) => {
     const navItems = [
         { icon: <LayoutDashboard size={20} />, label: 'Dashboard', to: routes.DASHBOARD },
         { icon: <BookOpen size={20} />, label: 'Study Sections', to: routes.SECTIONS.BASE },
-        { icon: <ShieldAlert size={20} />, label: 'SecOps Modules', to: routes.SECOPS.INDEX },
-        { icon: <Dumbbell size={20} />, label: 'Practice Zone', to: routes.PRACTICE.INDEX },
-        { icon: <Library size={20} />, label: 'Resources', to: routes.RESOURCES.GLOSSARY },
-        { icon: <BrainCircuit size={20} />, label: 'Flashcards', to: routes.PRACTICE.FLASHCARDS },
+        { icon: <ShieldAlert size={20} />, label: 'SecOps Modules', to: routes.SIMULATIONS.LIST },
+        { icon: <Dumbbell size={20} />, label: 'Practice Zone', to: routes.PRACTICE.EXAM },
+        { icon: <Library size={20} />, label: 'Notes', to: routes.NOTES },
+        { icon: <BrainCircuit size={20} />, label: 'Flashcards', to: routes.FLASHCARDS.MANAGER },
     ];
+
 
     return (
         <aside className={`${baseClasses} ${mobileClasses}`}>

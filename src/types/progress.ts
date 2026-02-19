@@ -1,30 +1,50 @@
-import type { QuizResult } from './question';
+// src/types/progress.ts
+import type { QuizResult } from './quiz';
 import type { FlashcardProgress } from './flashcard';
 
+export interface SectionProgress {
+    sectionId: number;
+    completedTopics: string[];   // Topic IDs e.g. ["1.1","1.2"]
+    quizScores: QuizResult[];
+    lastAccessed?: string;
+    completionPercentage: number; // 0–100
+}
+
+export interface Achievement {
+    id: string;
+    title: string;
+    description: string;
+    icon: string;
+    color: string;
+    earnedAt?: string;
+    isLocked: boolean;
+}
+
 export interface UserProgress {
-    // General Info
-    startDate: string;
-    targetExamDate?: string;
-    studyStreak: number;
-    lastStudyDate: string;
-    totalStudyTime: number;        // minutes
+    userId: string;
 
-    // Section Progress
-    sections: {
-        [sectionId: string]: {
-            completedTopics: string[];
-            quizScores: QuizResult[];
-            lastAccessed: string;
-        };
-    };
+    // Study Progress
+    sections: Record<number, SectionProgress>;
 
-    // Practice
-    failedQuestions: string[];     // question IDs
-    flaggedQuestions: string[];    // saved for later
+    // Quiz / Exam History
+    quizResults: QuizResult[];
 
-    // Flashcards
+    // Failed Questions flagged for review
+    failedQuestionIds: string[];
+
+    // Flashcard spaced-repetition data
     flashcardProgress: FlashcardProgress[];
 
-    // Full Exams
-    fullExamResults: QuizResult[];
+    // Study Streaks
+    studyStreak: number;
+    longestStreak: number;
+    lastStudyDate: string;
+
+    // Achievements
+    achievements: Achievement[];
+
+    // Statistics
+    totalStudyTime: number;        // Minutes
+    totalQuestionsAnswered: number;
+    accuracy: number;              // %
 }

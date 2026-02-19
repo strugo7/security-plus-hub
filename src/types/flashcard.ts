@@ -1,21 +1,33 @@
-import type { Difficulty } from './question';
+// src/types/flashcard.ts
 
-export type MasteryLevel = 'new' | 'learning' | 'reviewing' | 'mastered';
+export interface FlashcardDeck {
+    id: string;
+    title: string;
+    description?: string;
+    topicId?: string;
+    sectionId?: number;
+    cardCount: number;
+    isPublic: boolean;       // Admin-created = public
+    createdBy: string;       // User ID
+}
 
 export interface Flashcard {
-    id: string;                    // "fc-001"
-    front: string;
-    back: string;
-    section: string;               // "1.2"
+    id: string;
+    deckId: string;
+    front: string;           // Term / Question (supports Markdown)
+    back: string;            // Definition / Answer (supports Markdown)
     tags: string[];
-    difficulty: Difficulty;
+    createdAt: string;
 }
 
 export interface FlashcardProgress {
     cardId: string;
-    masteryLevel: MasteryLevel;
-    lastReviewed: string;          // ISO date
-    nextReview: string;            // ISO date
-    correctStreak: number;
-    totalReviews: number;
+    userId: string;
+    easeFactor: number;      // SM-2 default 2.5
+    interval: number;        // Days until next review
+    repetitions: number;
+    nextReview: string;      // ISO date
+    lastReview?: string;
 }
+
+export type FlashcardRating = 'easy' | 'medium' | 'hard';

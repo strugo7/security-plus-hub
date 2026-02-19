@@ -1,0 +1,171 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit",
+    "search": "Search",
+    "close": "Close"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "learning": "Learning",
+    "practice": "Practice",
+    "flashcards": "Flashcards",
+    "simulations": "Simulations",
+    "notes": "Notes",
+    "profile": "Profile",
+    "admin": "Admin",
+    "logout": "Logout"
+  },
+  "welcome": {
+    "title": "Welcome to",
+    "brand": "CyberGuard Academy",
+    "subtitle": "Advanced cyber defense training platform.",
+    "cta": "INITIALIZE SYSTEM ACCESS",
+    "secure": "Secure Connection: TLS 1.3",
+    "serverOnline": "SERVER: ONLINE"
+  },
+  "dashboard": {
+    "welcomeBack": "Welcome back, {{name}}",
+    "resumeLesson": "Resume Lesson",
+    "inProgress": "In Progress",
+    "overallProgress": "Overall Progress",
+    "examDomains": "Security+ Domains",
+    "completed": "Completed",
+    "notStarted": "Not Started",
+    "started": "Started",
+    "reviewDomain": "Review Domain",
+    "startDomain": "Start Domain",
+    "continue": "Continue"
+  },
+  "sections": {
+    "section1": {
+      "title": "General Security Concepts",
+      "description": "Compare and contrast various types of security controls, fundamental security principles, and change management."
+    },
+    "section2": {
+      "title": "Threats, Vulnerabilities & Mitigations",
+      "description": "Analyze potential indicators to determine the type of attack. Understand actors, vectors, and intelligence sources."
+    },
+    "section3": {
+      "title": "Security Architecture",
+      "description": "Implement security implications of different architecture models. Secure enterprise infrastructure and data."
+    },
+    "section4": {
+      "title": "Security Operations",
+      "description": "Apply appropriate incident response procedures. Use data sources to support an investigation."
+    },
+    "section5": {
+      "title": "Program Management & Oversight",
+      "description": "Summarize elements of effective security governance. Explain risk management processes and compliance."
+    }
+  },
+  "topics": {
+    "1.1": "Security Controls",
+    "1.2": "Security Concepts",
+    "1.3": "Change Management",
+    "1.4": "Cryptographic Solutions",
+    "2.1": "Threat Actors",
+    "2.2": "Threat Vectors and Attack Surfaces",
+    "2.3": "Types of Vulnerabilities",
+    "2.4": "Indicators of Malicious Activity",
+    "2.5": "Mitigation Techniques",
+    "3.1": "Architecture Models",
+    "3.2": "Applying Security Principles",
+    "3.3": "Protecting Data",
+    "3.4": "Resiliency and Recovery",
+    "4.1": "Security Techniques",
+    "4.2": "Asset Management",
+    "4.3": "Vulnerability Management",
+    "4.4": "Security Monitoring",
+    "4.5": "Enterprise Security",
+    "4.6": "Identity and Access Management",
+    "4.7": "Automation and Orchestration",
+    "4.8": "Incident Response",
+    "4.9": "Security Data Sources",
+    "5.1": "Security Governance",
+    "5.2": "Risk Management",
+    "5.3": "Third-party Risk",
+    "5.4": "Security Compliance",
+    "5.5": "Audits and Assessments",
+    "5.6": "Security Awareness"
+  },
+  "exam": {
+    "title": "Security+ Exam Simulation",
+    "timer": "Time Remaining",
+    "progress": "Progress",
+    "question": "Question",
+    "of": "of",
+    "flagForReview": "Flag for Review",
+    "pause": "Pause",
+    "help": "Help",
+    "questionMap": "Question Map",
+    "reviewAll": "Review All",
+    "current": "Current",
+    "answered": "Answered",
+    "flagged": "Flagged",
+    "submitExam": "Submit Exam",
+    "confirmSubmit": "Are you sure you want to submit?"
+  },
+  "flashcards": {
+    "title": "Flashcard Manager",
+    "totalCards": "Total Cards",
+    "toReview": "To Review",
+    "importExport": "Import/Export",
+    "searchDecks": "Search decks...",
+    "front": "Front (Term / Question)",
+    "back": "Back (Definition / Answer)",
+    "tags": "Tags",
+    "addTag": "+ Add tag",
+    "saveCard": "Save Card",
+    "saveAndAddAnother": "Save & Add Another",
+    "livePreview": "Live Preview",
+    "clickToFlip": "Click to flip",
+    "easy": "Easy",
+    "medium": "Medium",
+    "hard": "Hard"
+  },
+  "simulation": {
+    "title": "Cyber Attack Simulation",
+    "attackLibrary": "Attack Library",
+    "toolbox": "Toolbox",
+    "runAttack": "Run Attack",
+    "reset": "Reset",
+    "serverQueryLogs": "Server Query Logs",
+    "difficulty": "Difficulty",
+    "estimatedTime": "Est. Time"
+  },
+  "profile": {
+    "title": "Profile",
+    "editProfile": "Edit Profile",
+    "shareProfile": "Share Profile",
+    "currentRank": "Current Rank",
+    "achievements": "Achievements & Badges",
+    "viewAll": "View All",
+    "certifications": "Certifications",
+    "recentActivity": "Recent Activity",
+    "earned": "EARNED",
+    "locked": "LOCKED",
+    "level": "Level",
+    "joined": "Joined"
+  },
+  "admin": {
+    "lessonEditor": "Lesson Editor",
+    "examBuilder": "Exam Builder",
+    "questionBank": "Question Bank",
+    "questionAnalysis": "Question Analysis",
+    "saveDraft": "Save Draft",
+    "publish": "Publish",
+    "questionPool": "Question Pool",
+    "totalQuestions": "Total Questions",
+    "totalPoints": "Total Points",
+    "randomizeQuestions": "Randomize Questions",
+    "showExplanations": "Show Explanations"
+  }
+}

@@ -1,37 +1,52 @@
 export const routes = {
+    // Public
     HOME: '/',
     LOADING: '/loading',
+
+    // Auth
+    LOGIN: '/login',
+    REGISTER: '/register',
+
+    // Protected – Core
     DASHBOARD: '/dashboard',
     PROFILE: '/profile',
+
+    // Learning – Sections
     SECTIONS: {
         BASE: '/sections',
-        SECTION_1: '/sections/1',
-        SECTION_2: '/sections/2',
-        SECTION_3: '/sections/3',
-        SECTION_4: '/sections/4',
-        SECTION_5: '/sections/5',
+        DETAIL: '/sections/:sectionId',           // SectionPage
+        LESSON: '/sections/:sectionId/:topicId',  // LessonPage
     },
-    SECOPS: {
-        INDEX: '/secops',
-        SIEM: '/secops/siem',
-        IR: '/secops/ir',
-        NETWORK: '/secops/network-security',
-        ENDPOINT: '/secops/endpoint-security',
-        EMAIL: '/secops/email-security',
-        SCRIPTING: '/secops/scripting',
-        CLOUD: '/secops/cloud-security',
-        MITRE: '/secops/mitre-attack',
-    },
+
+    // Practice / Exams
     PRACTICE: {
-        INDEX: '/practice',
-        QUIZ: '/practice/quiz',
-        FULL_EXAM: '/practice/full-exam',
-        FLASHCARDS: '/practice/flashcards',
-        WEAK_AREAS: '/practice/weak-areas',
+        EXAM: '/practice/exam',
+        EXAM_RESULTS: '/practice/exam/results',
+        FAILED_QUESTIONS: '/practice/failed',
     },
-    RESOURCES: {
-        GLOSSARY: '/resources/glossary',
-        LEARNING_PATHS: '/resources/learning-paths',
-        TOOLS: '/resources/tools',
+
+    // Flashcards
+    FLASHCARDS: {
+        MANAGER: '/flashcards',
+        STUDY: '/flashcards/:deckId/study',
     },
-};
+
+    // Simulations
+    SIMULATIONS: {
+        LIST: '/simulations',
+        DETAIL: '/simulations/:simId',
+        REPORT: '/simulations/:simId/report',
+    },
+
+    // Notes
+    NOTES: '/notes',
+
+    // Admin
+    ADMIN: {
+        LESSON_EDITOR: '/admin/lessons',
+        LESSON_EDIT: '/admin/lessons/:lessonId',
+        EXAM_BUILDER: '/admin/exams/builder',
+        QUESTION_BANK: '/admin/questions',
+        QUESTION_ANALYSIS: '/admin/questions/analysis',
+    },
+} as const;
