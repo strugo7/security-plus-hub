@@ -2,6 +2,7 @@ export const routes = {
     HOME: '/',
     LOADING: '/loading',
     DASHBOARD: '/dashboard',
+    PROFILE: '/profile',
     SECTIONS: {
         BASE: '/sections',
         SECTION_1: '/sections/1',
