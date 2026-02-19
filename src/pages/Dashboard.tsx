@@ -5,10 +5,12 @@
 // ────────────────────────────────────────────────────
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import AppLayout from '../components/layout/AppLayout';
 import { domains, recentTopics, quickLinks, user } from '../data/appData';
 
 const Dashboard: React.FC = () => {
+    const navigate = useNavigate();
     const overallProgress = Math.round(
         domains.reduce((acc, d) => acc + d.progress, 0) / domains.length
     );
@@ -136,6 +138,7 @@ const Dashboard: React.FC = () => {
                                     boxShadow:
                                         '0 4px 6px rgba(0,0,0,0.4), 0 1px 3px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05)',
                                 }}
+                                onClick={() => navigate(`/sections/${domain.id}`)}
                                 onMouseEnter={(e) => {
                                     const el = e.currentTarget as HTMLDivElement;
                                     el.style.borderColor = domain.accentFrom;
