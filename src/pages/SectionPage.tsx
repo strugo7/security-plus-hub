@@ -5,7 +5,7 @@ import React, { useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import AppLayout from '../components/layout/AppLayout';
 import { useProgress } from '../context/ProgressContext';
-import { SECTIONS_DATA, Section, Topic } from '../data/sectionsData';
+import { SECTIONS_DATA, type Section, type Topic } from '../data/sectionsData';
 
 const SECTION_COLORS: Record<number, { from: string; to: string; accent: string }> = {
     1: { from: '#0da6f2', to: '#00d4ff', accent: '#0da6f2' },

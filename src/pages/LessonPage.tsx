@@ -6,7 +6,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import AppLayout from '../components/layout/AppLayout';
 import { useProgress } from '../context/ProgressContext';
-import { SECTIONS_DATA, Section, Topic, Lesson } from '../data/sectionsData';
+import { SECTIONS_DATA, type Section, type Topic, type Lesson } from '../data/sectionsData';
 
 type PanelMode = 'none' | 'notes' | 'overview';
 
