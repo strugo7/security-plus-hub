@@ -13,6 +13,7 @@ export interface Domain {
     modules: number;
     done: number;
     progress: number;
+    description: string;
 }
 
 export interface RecentTopic {

@@ -30,6 +30,7 @@ export const domains: Domain[] = [
         modules: 12,
         done: 7,
         progress: 58,
+        description: 'Covers different types of social engineering techniques, malware types, and unauthorized access attacks.',
     },
     {
         id: 2,
@@ -42,6 +43,7 @@ export const domains: Domain[] = [
         modules: 10,
         done: 3,
         progress: 30,
+        description: 'Focuses on enterprise architecture, cloud security concepts, and secure application development.',
     },
     {
         id: 3,
@@ -54,6 +56,7 @@ export const domains: Domain[] = [
         modules: 14,
         done: 9,
         progress: 64,
+        description: 'Details implementation of secure protocols, host and application security solutions.',
     },
     {
         id: 4,
@@ -66,6 +69,7 @@ export const domains: Domain[] = [
         modules: 9,
         done: 2,
         progress: 22,
+        description: 'Includes incident response procedures, digital forensics, and disaster recovery planning.',
     },
     {
         id: 5,
@@ -78,6 +82,7 @@ export const domains: Domain[] = [
         modules: 8,
         done: 5,
         progress: 62,
+        description: 'Explores risk management processes, regulations (GDPR, HIPAA), and security policies.',
     },
 ];
 

@@ -29,13 +29,7 @@ const Dashboard: React.FC = () => {
     );
 
     return (
-        <AppLayout
-            user={{
-                name: user.name,
-                role: 'Pro Member',
-                avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCh6SWWdMXSWt8npEVj2lt6awoJ0UxB8XDrjI4twduwsbpCNUc1dn28m28GrKjhqYy-5Q0IsjE-9SsjET4g0lC91ibmEQlGGNV20wgJ5iHpJ8y7Uay53Ic60KRWCxbbJ8ydAhfoscf6za0yeCz0hVFI6qXO7AAui_-_PemXWLqItr_ikLz1aDYAbbm3kkDtPvtY9dlewoFJtObsShamDQmKmNhGUj8fbp9jveImorPYflZhjXkrhalGt3oRPlXb5Z3cXbqwrVL8n54'
-            }}
-        >
+        <AppLayout>
             {/* Main Content Area - matching HTML max-width and padding */}
             <div className="w-full max-w-[1440px] mx-auto">
 
