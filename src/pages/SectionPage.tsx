@@ -43,7 +43,7 @@ export default function SectionPage() {
         <AppLayout hideSidebar>
             <div className="flex flex-1 overflow-hidden h-[calc(100vh-73px)]">
                 {/* ── Sidebar ── */}
-                <aside className="w-72 hidden lg:flex flex-col border-r border-slate-200 dark:border-[#233648] bg-white dark:bg-[#131d27] h-full sticky top-0 overflow-y-auto">
+                <aside className="w-72 hidden lg:flex flex-col border-r border-[#233648] bg-[#0d1117] h-full sticky top-0 overflow-y-auto">
                     <div className="p-6">
                         <h2 className="text-xs uppercase tracking-wider text-text-secondary font-semibold mb-4 pl-3">Course Curriculum</h2>
                         <nav className="space-y-1">
@@ -56,8 +56,8 @@ export default function SectionPage() {
                                         <button
                                             onClick={() => navigate(`/sections/${s.id}`)}
                                             className={`w-full flex items-center gap-3 px-3 py-2.5 text-left transition-colors ${isActive
-                                                    ? 'text-white bg-primary/10 border-l-2 border-primary py-3'
-                                                    : 'rounded-lg text-text-secondary hover:text-white hover:bg-[#233648]'
+                                                ? 'text-white bg-primary/10 border-l-2 border-primary py-3'
+                                                : 'rounded-lg text-text-secondary hover:text-white hover:bg-[#233648]'
                                                 }`}
                                         >
                                             <span className={`material-symbols-outlined text-[20px] ${isActive ? 'text-primary' : 'group-hover:text-white'
