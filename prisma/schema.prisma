@@ -1,0 +1,494 @@
+// ============================================================================
+// CyberGuard Academy - Database Schema
+// Security+ (SY0-701) Learning Platform
+// PostgreSQL + Prisma ORM
+// ============================================================================
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ============================================================================
+// ENUMS
+// ============================================================================
+
+enum Role {
+  user
+  admin
+}
+
+enum Membership {
+  free
+  pro
+  enterprise
+}
+
+enum QuestionType {
+  single
+  multiple
+  drag_drop    @map("drag-drop")
+  true_false   @map("true-false")
+}
+
+enum Difficulty {
+  easy
+  medium
+  hard
+}
+
+enum QuizType {
+  section
+  topic
+  exam
+  failed
+  custom
+}
+
+enum SimulationType {
+  sql_injection       @map("sql-injection")
+  xss
+  phishing
+  network_attack      @map("network-attack")
+  password_cracking   @map("password-cracking")
+  social_engineering  @map("social-engineering")
+}
+
+// ============================================================================
+// 1. USER - משתמש
+// ============================================================================
+
+model User {
+  id                     String    @id @default(uuid())
+  email                  String    @unique
+  passwordHash           String
+  name                   String    @db.VarChar(100)
+  avatar                 String?   @db.VarChar(500)
+  role                   Role      @default(user)
+  membership             Membership @default(free)
+  permissions            String[]  @default([])
+  language               String    @default("en") @db.VarChar(5)
+  studyStreak            Int       @default(0)
+  longestStreak          Int       @default(0)
+  lastStudyDate          DateTime? @db.Date
+  totalStudyMinutes      Int       @default(0)
+  totalQuestionsAnswered Int       @default(0)
+  createdAt              DateTime  @default(now())
+  updatedAt              DateTime  @updatedAt
+
+  // Relations
+  topicProgress      UserTopicProgress[]
+  quizResults        QuizResult[]
+  flashcardProgress  FlashcardProgress[]
+  flashcardDecks     FlashcardDeck[]
+  simulationResults  SimulationResult[]
+  notes              Note[]
+  achievements       UserAchievement[]
+  createdQuizzes     Quiz[]
+
+  @@index([role])
+  @@map("users")
+}
+
+// ============================================================================
+// 2. SECTION - תחום בחינה (1-5)
+// ============================================================================
+
+model Section {
+  id            Int      @id
+  title         String   @db.VarChar(200)
+  titleHe       String?  @db.VarChar(200)
+  description   String
+  descriptionHe String?
+  weight        Int      // Exam weight percentage (15, 22, 18, 28, 17)
+  icon          String   @db.VarChar(50)
+  color         String   @db.VarChar(20)
+  order         Int
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  topics          Topic[]
+  questions       Question[]
+  quizzes         Quiz[]
+  flashcardDecks  FlashcardDeck[]
+  topicProgress   UserTopicProgress[]
+
+  @@index([order])
+  @@map("sections")
+}
+
+// ============================================================================
+// 3. TOPIC - נושא ("1.1", "2.3", etc.)
+// ============================================================================
+
+model Topic {
+  id          String   @id @db.VarChar(10) // "1.1", "2.3", etc.
+  sectionId   Int
+  title       String   @db.VarChar(200)
+  titleHe     String?  @db.VarChar(200)
+  description String?
+  order       Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  section         Section             @relation(fields: [sectionId], references: [id])
+  lessons         Lesson[]
+  questions       Question[]
+  flashcardDecks  FlashcardDeck[]
+  notes           Note[]
+  topicProgress   UserTopicProgress[]
+
+  @@index([sectionId])
+  @@index([order])
+  @@map("topics")
+}
+
+// ============================================================================
+// 4. LESSON - שיעור
+// ============================================================================
+
+model Lesson {
+  id               String   @id @default(uuid())
+  topicId          String   @db.VarChar(10)
+  title            String   @db.VarChar(200)
+  content          Json     // Notion-style blocks: [{ id, type, content }]
+  estimatedMinutes Int      @default(15)
+  order            Int
+  isPublished      Boolean  @default(false)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  // Relations
+  topic Topic  @relation(fields: [topicId], references: [id])
+  notes Note[]
+
+  @@index([topicId])
+  @@index([order])
+  @@index([isPublished])
+  @@map("lessons")
+}
+
+// ============================================================================
+// 5. QUESTION - שאלה
+// ============================================================================
+
+model Question {
+  id            String       @id @db.VarChar(20) // "4.1-001"
+  topicId       String       @db.VarChar(10)
+  sectionId     Int          // Denormalized for performance
+  type          QuestionType
+  question      String
+  options       Json         // string[]
+  correct       Json         // number | number[]
+  explanation   String
+  difficulty    Difficulty
+  tags          String[]     @default([])
+  assets        Json?        // [{ type, content, caption }]
+  points        Int          @default(1)
+  timesAnswered Int          @default(0)
+  timesCorrect  Int          @default(0)
+  isActive      Boolean      @default(true)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  // Relations
+  topic   Topic   @relation(fields: [topicId], references: [id])
+  section Section @relation(fields: [sectionId], references: [id])
+
+  @@index([topicId])
+  @@index([sectionId])
+  @@index([difficulty])
+  @@index([isActive])
+  @@index([tags], type: Gin)
+  @@map("questions")
+}
+
+// ============================================================================
+// 6. QUIZ - מבחן/בוחן
+// ============================================================================
+
+model Quiz {
+  id               String   @id @default(uuid())
+  type             QuizType
+  title            String   @db.VarChar(200)
+  description      String?
+  sectionId        Int?
+  questionIds      String[] // Ordered question IDs
+  timeLimit        Int      @default(0) // Seconds (0 = no limit)
+  passingScore     Int      @default(70) // Percentage
+  showFeedback     Boolean  @default(true)
+  shuffleQuestions Boolean  @default(true)
+  shuffleOptions   Boolean  @default(true)
+  totalPoints      Int      @default(0)
+  isPublished      Boolean  @default(true)
+  createdBy        String
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  // Relations
+  section Section?     @relation(fields: [sectionId], references: [id])
+  creator User         @relation(fields: [createdBy], references: [id])
+  results QuizResult[]
+
+  @@index([type])
+  @@index([sectionId])
+  @@index([isPublished])
+  @@map("quizzes")
+}
+
+// ============================================================================
+// 7. QUIZ RESULT - תוצאת מבחן
+// ============================================================================
+
+model QuizResult {
+  id                String   @id @default(uuid())
+  userId            String
+  quizId            String
+  score             Int      // Number of correct answers
+  totalQuestions    Int
+  percentage        Decimal  @db.Decimal(5, 2)
+  passed            Boolean
+  timeSpent         Int      // Seconds
+  sectionBreakdown  Json     // { "1": { correct: 3, total: 5 } }
+  answers           Json     // { "4.1-001": { selected: 2, correct: true } }
+  failedQuestionIds String[] @default([])
+  completedAt       DateTime @default(now())
+
+  // Relations
+  user User @relation(fields: [userId], references: [id])
+  quiz Quiz @relation(fields: [quizId], references: [id])
+
+  @@index([userId])
+  @@index([quizId])
+  @@index([completedAt])
+  @@index([passed])
+  @@map("quiz_results")
+}
+
+// ============================================================================
+// 8. FLASHCARD DECK - חפיסת כרטיסיות
+// ============================================================================
+
+model FlashcardDeck {
+  id          String   @id @default(uuid())
+  title       String   @db.VarChar(200)
+  description String?
+  topicId     String?  @db.VarChar(10)
+  sectionId   Int?
+  isPublic    Boolean  @default(false) // Admin-created = public
+  createdBy   String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  topic   Topic?   @relation(fields: [topicId], references: [id])
+  section Section? @relation(fields: [sectionId], references: [id])
+  creator User     @relation(fields: [createdBy], references: [id])
+  cards   Flashcard[]
+
+  @@index([createdBy])
+  @@index([isPublic])
+  @@index([sectionId])
+  @@index([topicId])
+  @@map("flashcard_decks")
+}
+
+// ============================================================================
+// 9. FLASHCARD - כרטיסייה
+// ============================================================================
+
+model Flashcard {
+  id        String   @id @default(uuid())
+  deckId    String
+  front     String   // Term/Question (Markdown)
+  back      String   // Definition/Answer (Markdown)
+  tags      String[] @default([])
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  deck     FlashcardDeck       @relation(fields: [deckId], references: [id], onDelete: Cascade)
+  progress FlashcardProgress[]
+
+  @@index([deckId])
+  @@index([tags], type: Gin)
+  @@map("flashcards")
+}
+
+// ============================================================================
+// 10. FLASHCARD PROGRESS - התקדמות כרטיסייה (SM-2 Algorithm)
+// ============================================================================
+
+model FlashcardProgress {
+  id          String    @id @default(uuid())
+  userId      String
+  cardId      String
+  easeFactor  Decimal   @default(2.50) @db.Decimal(4, 2) // SM-2 ease factor
+  interval    Int       @default(0) // Days until next review
+  repetitions Int       @default(0)
+  nextReview  DateTime  @db.Date
+  lastReview  DateTime?
+
+  // Relations
+  user User      @relation(fields: [userId], references: [id])
+  card Flashcard @relation(fields: [cardId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, cardId])
+  @@index([userId, nextReview])
+  @@index([cardId])
+  @@map("flashcard_progress")
+}
+
+// ============================================================================
+// 11. SIMULATION - סימולציה
+// ============================================================================
+
+model Simulation {
+  id               String         @id @default(uuid())
+  type             SimulationType
+  title            String         @db.VarChar(200)
+  description      String
+  difficulty       Difficulty
+  estimatedMinutes Int
+  objectives       String[]
+  tools            Json           // [{ id, name, code, description, category }]
+  steps            Json           // [{ id, instruction, hint, validation }]
+  relatedTopics    String[]       @default([]) // Topic IDs
+  isPublished      Boolean        @default(true)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  // Relations
+  results SimulationResult[]
+
+  @@index([type])
+  @@index([difficulty])
+  @@index([isPublished])
+  @@map("simulations")
+}
+
+// ============================================================================
+// 12. SIMULATION RESULT - תוצאת סימולציה
+// ============================================================================
+
+model SimulationResult {
+  id             String   @id @default(uuid())
+  userId         String
+  simulationId   String
+  score          Int
+  stepsCompleted Int
+  totalSteps     Int
+  report         Json     // { attackType, vulnerability, impact, mitigation[], cweId?, cvssScore? }
+  completedAt    DateTime @default(now())
+
+  // Relations
+  user       User       @relation(fields: [userId], references: [id])
+  simulation Simulation @relation(fields: [simulationId], references: [id])
+
+  @@index([userId])
+  @@index([simulationId])
+  @@index([completedAt])
+  @@map("simulation_results")
+}
+
+// ============================================================================
+// 13. NOTE - הערה
+// ============================================================================
+
+model Note {
+  id        String   @id @default(uuid())
+  userId    String
+  title     String   @db.VarChar(200)
+  content   String   // Markdown
+  topicId   String?  @db.VarChar(10)
+  lessonId  String?
+  tags      String[] @default([])
+  isPinned  Boolean  @default(false)
+  color     String?  @db.VarChar(20)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  user   User    @relation(fields: [userId], references: [id])
+  topic  Topic?  @relation(fields: [topicId], references: [id])
+  lesson Lesson? @relation(fields: [lessonId], references: [id])
+
+  @@index([userId])
+  @@index([topicId])
+  @@index([lessonId])
+  @@index([isPinned])
+  @@index([tags], type: Gin)
+  @@map("notes")
+}
+
+// ============================================================================
+// 14. USER TOPIC PROGRESS - התקדמות בנושא
+// ============================================================================
+
+model UserTopicProgress {
+  id                   String    @id @default(uuid())
+  userId               String
+  topicId              String    @db.VarChar(10)
+  sectionId            Int       // Denormalized for performance
+  isCompleted          Boolean   @default(false)
+  completionPercentage Decimal   @default(0) @db.Decimal(5, 2)
+  lastAccessedAt       DateTime?
+  completedAt          DateTime?
+
+  // Relations
+  user    User    @relation(fields: [userId], references: [id])
+  topic   Topic   @relation(fields: [topicId], references: [id])
+  section Section @relation(fields: [sectionId], references: [id])
+
+  @@unique([userId, topicId])
+  @@index([userId, sectionId])
+  @@map("user_topic_progress")
+}
+
+// ============================================================================
+// 15. ACHIEVEMENT - הישג (Definition)
+// ============================================================================
+
+model Achievement {
+  id            String @id @db.VarChar(50) // "first-quiz", "streak-7"
+  title         String @db.VarChar(100)
+  titleHe       String? @db.VarChar(100)
+  description   String @db.VarChar(300)
+  descriptionHe String? @db.VarChar(300)
+  icon          String @db.VarChar(50)
+  color         String @db.VarChar(20)
+  category      String @db.VarChar(50) // study, quiz, streak, etc.
+  criteria      Json   // { type, value, ... }
+  order         Int    @default(0)
+
+  // Relations
+  users UserAchievement[]
+
+  @@map("achievements")
+}
+
+// ============================================================================
+// 16. USER ACHIEVEMENT - הישגי משתמש (Junction Table)
+// ============================================================================
+
+model UserAchievement {
+  id            String   @id @default(uuid())
+  userId        String
+  achievementId String   @db.VarChar(50)
+  earnedAt      DateTime @default(now())
+
+  // Relations
+  user        User        @relation(fields: [userId], references: [id])
+  achievement Achievement @relation(fields: [achievementId], references: [id])
+
+  @@unique([userId, achievementId])
+  @@index([userId])
+  @@map("user_achievements")
+}
