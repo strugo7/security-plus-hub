@@ -1,0 +1,33 @@
+Attackers use impersonation to make themselves appear to be someone different. In this video, you&#8217;ll learn about some of the most popular impersonation and fraud-based attacks.
+
+&lt;&lt; Previous Video: Phishing
+
+Next Video: Watering Hole Attacks &gt;&gt;
+
+Let&#8217;s step through a number of different phone calls that have been received by individuals with this particular pretext. Of course, this is one where there is an actor, and there&#8217;s a story that they tell. And these are actual scam calls taken from YouTube videos that are available. And they&#8217;re probably very similar to ones that you may have received. The first one is, &#8220;Hello, sir. My name is Wendy. And I&#8217;m from Microsoft Windows. This is an urgent checkup call for your computer as we have found several problems with it.&#8221;
+
+Obviously, this is not Wendy, and Wendy is not from Microsoft Windows. Another one says, &#8220;This is an enforcement action executed by the US Treasury intending your serious attention.&#8221; Bad grammar aside, it&#8217;s very unlikely that this voicemail was indeed left by the US Treasury.
+
+And lastly, &#8220;Congratulations on your excellent payment history.&#8221; Well, already we know that this is not accurate. &#8220;You now qualify for 0% interest rates on all of your credit card accounts.&#8221; And again, this is not someone from a credit card company or a financing company. This is all someone taking advantage of impersonation. Impersonation is when an attacker is pretending to be someone that they&#8217;re not.
+
+This may be used to make you more trustful. For example, they could call and say they&#8217;re from your company&#8217;s help desk, and they understand there&#8217;s some problems that need to be resolved on your system. Obviously, they&#8217;re not from your company&#8217;s help desk, but you thinking that they work for the same company as you immediately provides some level of trust.
+
+Or they may call you and say that they are the vice president for finance, or they&#8217;re responsible for manufacturing within your organization. They&#8217;re obviously not from your organization, but by introducing themselves as someone higher in rank, they&#8217;re hoping that you will, without thinking, provide them with the information they need.
+
+Or the attacker may be using very large terms or technical details to get you thinking more about what they&#8217;re saying rather than if this call is indeed legitimate. Attackers use impersonation all the time to be able to make you more comfortable with the conversation or to get you to provide information to someone who is more trustworthy than some stranger calling you from outside.
+
+One of the goals of the attacker is to elicit information from the person they&#8217;re calling. They&#8217;re looking for a piece of information or an important detail that they normally would not have access to. This is very commonly seen with voice phishing, or vishing, where someone is calling with a story that eventually will get you to give up your credit card number, your Social Security number, your bank details, or other important and sensitive information.
+
+But obviously, the attacker can&#8217;t simply ask, so what&#8217;s your bank account number? Instead, they need to have a story about how it&#8217;s important that we get your bank account number because there&#8217;s been a problem sending a payment to a particular third party. And through this entire story, somehow, they&#8217;re getting to trust them and provide your banking information.
+
+Another use of impersonation is for the attackers to take advantage of identity fraud. This is when they&#8217;ll pretend to be you, using your private information. But in reality, the attacker is the one opening these accounts. For example, an attacker might open a credit card account in your name with your information but use their address. So the credit card is mailed directly to the attacker. They&#8217;ll then use this credit card to purchase products and services. And of course, the attacker has no intention to pay for any of these.
+
+And of course, all of this will appear on your credit report as nonpayment for an account that you allegedly opened. Attackers can also use identity fraud to open up their own bank account under your name. By using your personal information, they now have a bank account that they can use to store the funds that they are creating from their illegal activities. And they can now use that checking account and their position as a customer with the bank to open up loans. Those loans, of course, would be under your name. But of course, the attacker is going to take the money from that loan and use that somewhere else.
+
+And of course, identity fraud could be used with government agencies for the attacker to get benefits under your name. This is commonly seen with things like tax fraud, where the attacker will send in your tax forms as you, and they&#8217;ll receive the overpayment to their account. They effectively have gotten your tax refund before you have a chance to do the same thing.
+
+There are a number of steps that you can use to help prevent impersonation. One is to not volunteer information. If somebody calls and tells you they&#8217;re from the help desk and they need your password in order to fix a problem on your computer, then they&#8217;re probably phishing for information because the support team does not need a password to gain access to your system. You should also not give away any of your personal information over the telephone, email, or any other method.
+
+The attackers would love to get information about your address, your Social Security number, your birthday, and other important details that they can then use to open up accounts in your name. And if you think the person contacting you is legitimate, but you&#8217;re uncomfortable providing personal information, you might want to do your own verification. Most of the time, you can ask the person if you can verify them over the phone, and then you can check a public phone number to make sure that that is the person who&#8217;s really contacting you.
+
+The process of verification is one that should be a normal process within your organization. No one should take a phone call at face value, especially if that phone call is looking for financial information or sensitive details.

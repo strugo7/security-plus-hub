@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="he" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buffer Overflow Attack - Isometric SVG</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0f172a;
+            /* Dark mode background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        svg {
+            width: 100%;
+            height: 100%;
+            max-width: 100vw;
+            max-height: 100vh;
+        }
+
+        /* --- Isometric Faces & Basic Styling --- */
+        .face-top {
+            fill: #1e293b;
+            stroke: #334155;
+            stroke-width: 1;
+            stroke-linejoin: round;
+        }
+
+        .face-left {
+            fill: #0f172a;
+            stroke: #1e293b;
+            stroke-width: 1;
+            stroke-linejoin: round;
+        }
+
+        .face-right {
+            fill: #334155;
+            stroke: #475569;
+            stroke-width: 1;
+            stroke-linejoin: round;
+        }
+
+        /* RAM Board / Memory specific */
+        .pcb-board {
+            fill: #064e3b;
+            stroke: #022c22;
+            stroke-width: 2;
+        }
+
+        .ram-pin {
+            fill: #eab308;
+        }
+
+        .cell-safe {
+            fill: #0f172a;
+            color: #38bdf8;
+        }
+
+        .cell-target {
+            fill: #0f172a;
+            color: #10b981;
+        }
+
+        .cell-hacked {
+            fill: #450a0a;
+            color: #ef4444;
+            filter: url(#glow-red);
+        }
+
+        /* Typography */
+        .label {
+            fill: #94a3b8;
+            font-size: 14px;
+            font-weight: 500;
+            text-anchor: middle;
+            pointer-events: none;
+        }
+
+        .label-hebrew {
+            font-size: 16px;
+            font-weight: 600;
+            fill: #e2e8f0;
+        }
+
+        .mem-address {
+            font-family: monospace;
+            font-size: 10px;
+            fill: #64748b;
+        }
+
+        .data-char {
+            font-family: monospace;
+            font-size: 16px;
+            font-weight: bold;
+            fill: #f8fafc;
+            text-anchor: middle;
+        }
+
+        .value-safe {
+            fill: #10b981;
+            font-family: monospace;
+            font-size: 18px;
+            font-weight: bold;
+            text-anchor: middle;
+        }
+
+        .value-danger {
+            fill: #ef4444;
+            font-family: monospace;
+            font-size: 18px;
+            font-weight: bold;
+            text-anchor: middle;
+        }
+
+        /* --- Component Floating Animations --- */
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-delay-1 {
+            animation: float 6s ease-in-out 1.5s infinite;
+        }
+
+        .floating-delay-2 {
+            animation: float 6s ease-in-out 3s infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* --- Cables & Data Flow --- */
+        .cable-base {
+            fill: none;
+            stroke: #1e293b;
+            stroke-width: 6;
+            stroke-linecap: round;
+        }
+
+        .data-flow {
+            fill: none;
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-dasharray: 10 20;
+            animation: flow-forward 1s linear infinite;
+        }
+
+        .flow-blue {
+            stroke: #38bdf8;
+        }
+
+        .flow-red {
+            stroke: #ef4444;
+            opacity: 0;
+            animation: flow-active 12s infinite;
+        }
+
+        @keyframes flow-forward {
+            from {
+                stroke-dashoffset: 30;
+            }
+
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        /* --- SYNCHRONIZED EXPLOIT ANIMATIONS (12s Cycle) --- */
+        /* Phase 1: 0-2s (Idle) */
+        /* Phase 2: 2-4s (Data Sending) */
+        /* Phase 3: 4-5s (Buffer filling, overflow happens) */
+        /* Phase 4: 5-10s (Server Hacked, Privilege Escalation) */
+        /* Phase 5: 10-12s (Resetting) */
+
+        /* Attacker Payload Generation */
+        .payload-text {
+            opacity: 0;
+            animation: payload-send 12s infinite;
+        }
+
+        @keyframes payload-send {
+
+            0%,
+            15% {
+                opacity: 0;
+                transform: translateY(0);
+            }
+
+            20%,
+            35% {
+                opacity: 1;
+                transform: translateY(-30px);
+            }
+
+            40%,
+            100% {
+                opacity: 0;
+                transform: translateY(-40px);
+            }
+        }
+
+        /* Variable A (Buffer) filling up */
+        .buffer-char {
+            opacity: 0;
+            animation: buffer-fill 12s infinite;
+        }
+
+        @keyframes buffer-fill {
+
+            0%,
+            30% {
+                opacity: 0;
+            }
+
+            35%,
+            95% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* The Overflowing 'e' - The star of the show! */
+        /* It starts invisible, appears at the end of Variable A, jumps to Variable B */
+        .overflow-char {
+            opacity: 0;
+            animation: overflow-jump 12s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+        }
+
+        @keyframes overflow-jump {
+
+            0%,
+            41% {
+                opacity: 0;
+                transform: translate(0, 0) scale(1);
+            }
+
+            42% {
+                opacity: 1;
+                transform: translate(0, 0) scale(1.5);
+                fill: #38bdf8;
+            }
+
+            46% {
+                opacity: 1;
+                transform: translate(28px, -30px) scale(2);
+                fill: #ef4444;
+            }
+
+            50%,
+            95% {
+                opacity: 1;
+                transform: translate(56px, 28px) scale(1);
+                fill: #ef4444;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(56px, 28px) scale(1);
+            }
+        }
+
+        /* Memory Target State Changes */
+        .mem-target-box {
+            animation: target-box-shift 12s infinite;
+        }
+
+        @keyframes target-box-shift {
+
+            0%,
+            49% {
+                fill: #0f172a;
+                color: #10b981;
+                filter: none;
+            }
+
+            50%,
+            95% {
+                fill: #450a0a;
+                color: #ef4444;
+                filter: url(#glow-red);
+            }
+
+            100% {
+                fill: #0f172a;
+                color: #10b981;
+                filter: none;
+            }
+        }
+
+        /* Variable B Value changing (1979 -> 25856) */
+        .val-1979 {
+            opacity: 1;
+            animation: val-safe-hide 12s infinite;
+        }
+
+        .val-25856 {
+            opacity: 0;
+            animation: val-danger-show 12s infinite;
+        }
+
+        @keyframes val-safe-hide {
+
+            0%,
+            49% {
+                opacity: 1;
+            }
+
+            50%,
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes val-danger-show {
+
+            0%,
+            49% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.3);
+            }
+
+            /* Pop effect */
+            54%,
+            95% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* Server State Changes */
+        .server-screen-safe {
+            opacity: 1;
+            animation: val-safe-hide 12s infinite;
+        }
+
+        .server-screen-hacked {
+            opacity: 0;
+            animation: val-danger-show 12s infinite;
+        }
+
+        @keyframes flow-active {
+
+            0%,
+            49% {
+                opacity: 0;
+            }
+
+            50%,
+            95% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* Privilege Escalate Text Alert */
+        .alert-text {
+            font-size: 13px;
+            font-weight: bold;
+            fill: #ef4444;
+            letter-spacing: 1px;
+            opacity: 0;
+            animation: alert-flash 12s infinite;
+        }
+
+        @keyframes alert-flash {
+
+            0%,
+            50% {
+                opacity: 0;
+                transform: translateY(0);
+            }
+
+            52%,
+            90% {
+                opacity: 1;
+                transform: translateY(-15px);
+            }
+
+            95%,
+            100% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet">
+        <defs>
+            <!-- Drop Shadow -->
+            <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+                <feDropShadow dx="0" dy="20" stdDeviation="12" flood-color="#000000" flood-opacity="0.8" />
+            </filter>
+
+            <!-- Glow Filters -->
+            <filter id="glow-blue" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+                <feMerge>
+                    <feMergeNode in="coloredBlur" />
+                    <feMergeNode in="SourceGraphic" />
+                </feMerge>
+            </filter>
+            <filter id="glow-red" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="6" result="coloredBlur" />
+                <feMerge>
+                    <feMergeNode in="coloredBlur" />
+                    <feMergeNode in="SourceGraphic" />
+                </feMerge>
+            </filter>
+            <filter id="glow-green" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+                <feMerge>
+                    <feMergeNode in="coloredBlur" />
+                    <feMergeNode in="SourceGraphic" />
+                </feMerge>
+            </filter>
+
+            <!-- Isometric Base Cell Definition (30x15 isometric projection) -->
+            <g id="iso-cell">
+                <path d="M -30,-15 L 0,0 L 0,8 L -30,-7 Z" fill="currentColor" opacity="0.6" />
+                <path d="M 0,0 L 30,-15 L 30,-7 L 0,8 Z" fill="currentColor" opacity="0.4" />
+                <path d="M 0,0 L 30,-15 L 0,-30 L -30,-15 Z" stroke="currentColor" stroke-width="1.5"
+                    stroke-linejoin="round" />
+            </g>
+
+            <!-- Paths -->
+            <path id="path-attacker-ram" d="M 150,550 C 250,450 300,300 400,350" />
+            <path id="path-ram-server" d="M 650,450 C 800,550 900,600 1000,600" />
+        </defs>
+
+        <!-- ================= CABLES LAYER ================= -->
+        <g id="cables">
+            <!-- Base Cables -->
+            <use href="#path-attacker-ram" class="cable-base" />
+            <use href="#path-ram-server" class="cable-base" />
+
+            <!-- Animated Data Flow -->
+            <!-- Safe request data flowing to RAM -->
+            <use href="#path-attacker-ram" class="data-flow flow-blue" filter="url(#glow-blue)" />
+            <!-- Hacked (Red) data flowing from RAM to Server after overflow -->
+            <use href="#path-ram-server" class="data-flow flow-red" filter="url(#glow-red)" />
+        </g>
+
+        <!-- ================= COMPONENTS LAYER ================= -->
+
+        <!-- 1. Attacker (Client) - Bottom Left -->
+        <g transform="translate(150, 550)">
+            <g class="floating" filter="url(#shadow)">
+                <!-- Laptop Base -->
+                <path class="face-top" d="M 0,0 L 50,-25 L 0,-50 L -50,-25 Z" />
+                <path class="face-left" d="M -50,-25 L 0,0 L 0,8 L -50,-17 Z" />
+                <path class="face-right" d="M 0,0 L 50,-25 L 50,-17 L 0,8 Z" />
+                <!-- Screen -->
+                <path class="face-left" d="M -50,-25 L 0,-50 L 0,-100 L -50,-75 Z" />
+                <path fill="#020617" stroke="#1e293b" d="M -47,-30 L -3,-53 L -3,-95 L -47,-72 Z" />
+
+                <!-- Screen Code/Hacking visuals -->
+                <rect x="-35" y="-75" width="25" height="4" fill="#ef4444" transform="skewY(-26.5)" />
+                <rect x="-35" y="-65" width="15" height="3" fill="#38bdf8" transform="skewY(-26.5)" />
+
+                <!-- Floating Payload Text generated by Attacker -->
+                <g class="payload-text">
+                    <rect x="-35" y="-120" width="80" height="25" rx="4" fill="#0f172a" stroke="#38bdf8"
+                        stroke-width="1" />
+                    <text x="5" y="-103" class="data-char" style="font-size: 14px; fill: #38bdf8;">"excessive"</text>
+                    <!-- Small line pointing down -->
+                    <path d="M 5,-95 L 5,-85" stroke="#38bdf8" stroke-width="2" />
+                </g>
+
+                <!-- Labels -->
+                <text x="0" y="35" class="label">Attacker / Client</text>
+                <text x="0" y="55" class="label label-hebrew">תוקף - שולח פקודה</text>
+            </g>
+        </g>
+
+        <!-- 2. System Memory (RAM) - Center -->
+        <g transform="translate(450, 280)">
+            <g class="floating-delay-1" filter="url(#shadow)">
+
+                <!-- PCB Board -->
+                <path class="pcb-board" d="M -80,-80 L 360,140 L 260,190 L -180,-30 Z" />
+                <!-- PCB Thickness -->
+                <path fill="#022c22" d="M -180,-30 L 260,190 L 260,205 L -180,-15 Z" />
+                <path fill="#065f46" d="M 360,140 L 260,190 L 260,205 L 360,155 Z" />
+
+                <!-- Gold RAM Pins -->
+                <g transform="translate(-180, -30) skewY(26.5)">
+                    <line x1="15" y1="5" x2="425" y2="5" stroke="#eab308" stroke-width="6" stroke-dasharray="4 4" />
+                </g>
+
+                <!-- ================= MEMORY SLOTS (The Grid) ================= -->
+                <g transform="translate(-16, 2)">
+
+                    <!-- Title for Variable A -->
+                    <text x="112" y="150" class="label" style="fill: #38bdf8;">Variable A (Buffer)</text>
+                    <text x="112" y="170" class="label label-hebrew" style="font-size:12px;">משתנה א' - 8 בתים</text>
+
+                    <!-- Buffer Cells (8 Bytes) -->
+                    <!-- Cell 0 -->
+                    <g transform="translate(0, 0)">
+                        <use href="#iso-cell" class="cell-safe" />
+                        <text x="0" y="-10" class="data-char buffer-char">e</text>
+                    </g>
+                    <!-- Cell 1 -->
+                    <g transform="translate(32, 16)">
+                        <use href="#iso-cell" class="cell-safe" />
+                        <text x="0" y="-10" class="data-char buffer-char" style="animation-delay: 0.1s">x</text>
+                    </g>
+                    <!-- Cell 2 -->
+                    <g transform="translate(64, 32)">
+                        <use href="#iso-cell" class="cell-safe" />
+                        <text x="0" y="-10" class="data-char buffer-char" style="animation-delay: 0.2s">c</text>
+                    </g>
+                    <!-- Cell 3 -->
+                    <g transform="translate(96, 48)">
+                        <use href="#iso-cell" class="cell-safe" />
+                        <text x="0" y="-10" class="data-char buffer-char" style="animation-delay: 0.3s">e</text>
+                    </g>
+                    <!-- Cell 4 -->
+                    <g transform="translate(128, 64)">
+                        <use href="#iso-cell" class="cell-safe" />
+                        <text x="0" y="-10" class="data-char buffer-char" style="animation-delay: 0.4s">s</text>
+                    </g>
+                    <!-- Cell 5 -->
+                    <g transform="translate(160, 80)">
+                        <use href="#iso-cell" class="cell-safe" />
+                        <text x="0" y="-10" class="data-char buffer-char" style="animation-delay: 0.5s">s</text>
+                    </g>
+                    <!-- Cell 6 -->
+                    <g transform="translate(192, 96)">
+                        <use href="#iso-cell" class="cell-safe" />
+                        <text x="0" y="-10" class="data-char buffer-char" style="animation-delay: 0.6s">i</text>
+                    </g>
+                    <!-- Cell 7 (End of intended buffer) -->
+                    <g transform="translate(224, 112)">
+                        <use href="#iso-cell" class="cell-safe" />
+                        <text x="0" y="-10" class="data-char buffer-char" style="animation-delay: 0.7s">v</text>
+
+                        <!-- ================= THE OVERFLOW JUMP ================= -->
+                        <!-- This 'e' jumps from Cell 7 to Cell 8 -->
+                        <text x="0" y="-10" class="data-char overflow-char">e</text>
+                    </g>
+
+                    <!-- Gap / Boundary Graphic -->
+                    <g transform="translate(0,0)">
+                        <path d="M 248,110 L 268,100 L 268,130 L 248,140 Z" fill="#ef4444" opacity="0.3" />
+                        <text x="258" y="155" class="mem-address" style="fill:#ef4444; text-anchor:middle;">-- BOUNDARY
+                            --</text>
+                    </g>
+
+                    <!-- Title for Variable B -->
+                    <text x="296" y="190" class="label" style="fill: #10b981;">Variable B (Target)</text>
+                    <text x="296" y="210" class="label label-hebrew" style="font-size:12px;">משתנה ב' - הרשאות</text>
+
+                    <!-- Target Cells (2 Bytes) -->
+                    <!-- Cell 8 (Gets overwritten by overflow) -->
+                    <g transform="translate(280, 140)">
+                        <use href="#iso-cell" class="mem-target-box" />
+                    </g>
+
+                    <!-- Cell 9 -->
+                    <g transform="translate(312, 156)">
+                        <use href="#iso-cell" class="mem-target-box" />
+                    </g>
+
+                    <!-- Floating Values over Variable B -->
+                    <g transform="translate(296, 90)">
+                        <!-- Connecting dashed line to the cell -->
+                        <path d="M 0,0 L 0,55" stroke="#475569" stroke-width="1" stroke-dasharray="2 2" />
+                        <!-- Background panel for the value -->
+                        <rect x="-35" y="-25" width="70" height="25" rx="4" fill="#020617" stroke="#475569"
+                            stroke-width="1" />
+
+                        <!-- State 1: Safe Value (1979) -->
+                        <text x="0" y="-8" class="value-safe val-1979" filter="url(#glow-green)">1979</text>
+
+                        <!-- State 2: Overwritten Value (25856) -->
+                        <text x="0" y="-8" class="value-danger val-25856" filter="url(#glow-red)">25856</text>
+                    </g>
+                </g>
+
+                <!-- Labels -->
+                <text x="0" y="240" class="label">Memory (RAM Stack)</text>
+                <text x="0" y="260" class="label label-hebrew">זיכרון מוקצה באפליקציה</text>
+            </g>
+        </g>
+
+        <!-- 3. Target Server - Bottom Right -->
+        <g transform="translate(1000, 600)">
+            <g class="floating-delay-2" filter="url(#shadow)">
+                <!-- Rack Top -->
+                <path class="face-top" d="M 0,-120 L 40,-140 L 0,-160 L -40,-140 Z" />
+                <!-- Rack Left -->
+                <path class="face-left" d="M -40,-140 L 0,-120 L 0,0 L -40,-20 Z" />
+                <!-- Rack Right -->
+                <path class="face-right" d="M 0,-120 L 40,-140 L 40,-20 L 0,0 Z" />
+
+                <!-- Server Blades -->
+                <path fill="#020617" d="M -35,-125 L -5,-110 L -5,-95 L -35,-110 Z" />
+                <path fill="#020617" d="M -35,-85 L -5,-70 L -5,-55 L -35,-70 Z" />
+                <path fill="#020617" d="M -35,-45 L -5,-30 L -5,-15 L -35,-30 Z" />
+
+                <!-- Screen Panel attached to Server -->
+                <g transform="translate(-40, -180)">
+                    <rect x="-60" y="-40" width="120" height="60" rx="5" fill="#020617" stroke="#334155"
+                        stroke-width="2" />
+
+                    <!-- Default State: User is GUEST -->
+                    <g class="server-screen-safe">
+                        <!-- Shield Icon (Locked/Safe) -->
+                        <path d="M -10,-25 L 10,-25 L 10,-15 C 10,-5 0,5 0,5 C 0,5 -10,-5 -10,-15 Z" fill="#10b981" />
+                        <rect x="-3" y="-20" width="6" height="6" fill="#020617" rx="1" />
+                        <text x="0" y="10" class="data-char" style="font-size: 12px; fill:#10b981;">ACCESS: GUEST</text>
+                    </g>
+
+                    <!-- Exploit State: Privilege Escalated to ADMIN -->
+                    <g class="server-screen-hacked">
+                        <rect x="-60" y="-40" width="120" height="60" rx="5" fill="none" stroke="#ef4444"
+                            stroke-width="2" filter="url(#glow-red)" />
+                        <!-- Crown / Star Icon (Admin) -->
+                        <path d="M -15,-25 L -10,-15 L 0,-25 L 10,-15 L 15,-25 L 10,-5 L -10,-5 Z" fill="#eab308"
+                            filter="url(#glow-red)" />
+                        <text x="0" y="10" class="data-char" style="font-size: 12px; fill:#ef4444;">ACCESS: ADMIN</text>
+                    </g>
+                </g>
+
+                <!-- Privilege Escalation Alert Text -->
+                <text x="-40" y="-230" class="alert-text label-hebrew text-center" filter="url(#glow-red)">
+                    PRIVILEGE ESCALATION!
+                </text>
+                <text x="-40" y="-210" class="alert-text label-hebrew text-center" style="font-size: 14px;"
+                    filter="url(#glow-red)">
+                    הסלמת הרשאות!
+                </text>
+
+                <!-- Labels -->
+                <text x="0" y="35" class="label">Target Server</text>
+                <text x="0" y="55" class="label label-hebrew">שרת יעד (נפרץ)</text>
+            </g>
+        </g>
+
+    </svg>
+
+</body>
+
+</html>

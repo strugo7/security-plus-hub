@@ -1,0 +1,372 @@
+[
+  {
+    "module": "Module 2 \u2013 Threats, Vulnerabilities, and Mitigations",
+    "submodule": "Module 2.1 \u2013 Threat Actors and Motivations",
+    "lesson": "Threat Actors"
+  },
+  {
+    "module": "Module 2 \u2013 Threats, Vulnerabilities, and Mitigations",
+    "submodule": "Module 2.2 \u2013 Threat Vectors and Attack Surfaces",
+    "lesson": "Phishing"
+  },
+  {
+    "module": "Module 2 \u2013 Threats, Vulnerabilities, and Mitigations",
+    "submodule": "Module 2.2 \u2013 Threat Vectors and Attack Surfaces",
+    "lesson": "Impersonation"
+  },
+  {
+    "module": "Module 2 \u2013 Threats, Vulnerabilities, and Mitigations",
+    "submodule": "Module 2.2 \u2013 Threat Vectors and Attack Surfaces",
+    "lesson": "Other Social Engineering Attacks"
+  },
+  {
+    "module": "Module 2 \u2013 Threats, Vulnerabilities, and Mitigations",
+    "submodule": "Module 2.3 \u2013 Types of Vulnerabilities",
+    "lesson": "Memory Injections"
+  },
+  {
+    "module": "Module 2 \u2013 Threats, Vulnerabilities, and Mitigations",
+    "submodule": "Module 2.3 \u2013 Types of Vulnerabilities",
+    "lesson": "Race Conditions"
+  },
+  {
+    "module": "Module 2 \u2013 Threats, Vulnerabilities, and Mitigations",
+    "submodule": "Module 2.3 \u2013 Types of Vulnerabilities",
+    "lesson": "Malicious Updates"
+  },
+  {
+    "module": "Module 2 \u2013 Threats, Vulnerabilities, and Mitigations",
+    "submodule": "Module 2.3 \u2013 Types of Vulnerabilities",
+    "lesson": "Operating System Vulnerabilities"
+  },
+  {
+    "module": "Module 2 \u2013 Threats, Vulnerabilities, and Mitigations",
+    "submodule": "Module 2.3 \u2013 Types of Vulnerabilities",
+    "lesson": "SQL Injection"
+  },
+  {
+    "module": "Module 2 \u2013 Threats, Vulnerabilities, and Mitigations",
+    "submodule": "Module 2.3 \u2013 Types of Vulnerabilities",
+    "lesson": "Hardware Vulnerabilities"
+  },
+  {
+    "module": "Module 2 \u2013 Threats, Vulnerabilities, and Mitigations",
+    "submodule": "Module 2.3 \u2013 Types of Vulnerabilities",
+    "lesson": "Virtualization Vulnerabilities"
+  },
+  {
+    "module": "Module 2 \u2013 Threats, Vulnerabilities, and Mitigations",
+    "submodule": "Module 2.3 \u2013 Types of Vulnerabilities",
+    "lesson": "Supply Chain Vulnerabilities"
+  },
+  {
+    "module": "Module 2 \u2013 Threats, Vulnerabilities, and Mitigations",
+    "submodule": "Module 2.3 \u2013 Types of Vulnerabilities",
+    "lesson": "Misconfiguration Vulnerabilities"
+  },
+  {
+    "module": "Module 2 \u2013 Threats, Vulnerabilities, and Mitigations",
+    "submodule": "Module 2.4 \u2013 Indicators of Malicious Activity",
+    "lesson": "An Overview of Malware"
+  },
+  {
+    "module": "Module 2 \u2013 Threats, Vulnerabilities, and Mitigations",
+    "submodule": "Module 2.4 \u2013 Indicators of Malicious Activity",
+    "lesson": "Spyware and Bloatware"
+  },
+  {
+    "module": "Module 2 \u2013 Threats, Vulnerabilities, and Mitigations",
+    "submodule": "Module 2.4 \u2013 Indicators of Malicious Activity",
+    "lesson": "Other Malware Types"
+  },
+  {
+    "module": "Module 2 \u2013 Threats, Vulnerabilities, and Mitigations",
+    "submodule": "Module 2.4 \u2013 Indicators of Malicious Activity",
+    "lesson": "Physical Attacks"
+  },
+  {
+    "module": "Module 2 \u2013 Threats, Vulnerabilities, and Mitigations",
+    "submodule": "Module 2.4 \u2013 Indicators of Malicious Activity",
+    "lesson": "Denial of Service"
+  },
+  {
+    "module": "Module 2 \u2013 Threats, Vulnerabilities, and Mitigations",
+    "submodule": "Module 2.4 \u2013 Indicators of Malicious Activity",
+    "lesson": "DNS Attacks"
+  },
+  {
+    "module": "Module 2 \u2013 Threats, Vulnerabilities, and Mitigations",
+    "submodule": "Module 2.4 \u2013 Indicators of Malicious Activity",
+    "lesson": "On-path Attacks"
+  },
+  {
+    "module": "Module 2 \u2013 Threats, Vulnerabilities, and Mitigations",
+    "submodule": "Module 2.4 \u2013 Indicators of Malicious Activity",
+    "lesson": "Replay Attacks"
+  },
+  {
+    "module": "Module 2 \u2013 Threats, Vulnerabilities, and Mitigations",
+    "submodule": "Module 2.4 \u2013 Indicators of Malicious Activity",
+    "lesson": "Malicious Code"
+  },
+  {
+    "module": "Module 2 \u2013 Threats, Vulnerabilities, and Mitigations",
+    "submodule": "Module 2.4 \u2013 Indicators of Malicious Activity",
+    "lesson": "Cryptographic Attacks"
+  },
+  {
+    "module": "Module 2 \u2013 Threats, Vulnerabilities, and Mitigations",
+    "submodule": "Module 2.4 \u2013 Indicators of Malicious Activity",
+    "lesson": "Password Attacks"
+  },
+  {
+    "module": "Module 2 \u2013 Threats, Vulnerabilities, and Mitigations",
+    "submodule": "Module 2.4 \u2013 Indicators of Malicious Activity",
+    "lesson": "Indicators of Compromise"
+  },
+  {
+    "module": "Module 2 \u2013 Threats, Vulnerabilities, and Mitigations",
+    "submodule": "Module 2.5 \u2013 Mitigation Techniques",
+    "lesson": "Mitigation Techniques"
+  },
+  {
+    "module": "Module 2 \u2013 Threats, Vulnerabilities, and Mitigations",
+    "submodule": "Module 2.5 \u2013 Mitigation Techniques",
+    "lesson": "Hardening Techniques"
+  },
+  {
+    "module": "Module 3 \u2013 Security Architecture",
+    "submodule": "Module 3.1 \u2013 Architecture Models",
+    "lesson": "Network Infrastructure Concepts"
+  },
+  {
+    "module": "Module 3 \u2013 Security Architecture",
+    "submodule": "Module 3.1 \u2013 Architecture Models",
+    "lesson": "Other Infrastructure Concepts"
+  },
+  {
+    "module": "Module 3 \u2013 Security Architecture",
+    "submodule": "Module 3.1 \u2013 Architecture Models",
+    "lesson": "Infrastructure Considerations"
+  },
+  {
+    "module": "Module 3 \u2013 Security Architecture",
+    "submodule": "Module 3.2 \u2013 Securing Enterprise Infrastructure",
+    "lesson": "Secure Infrastructures"
+  },
+  {
+    "module": "Module 3 \u2013 Security Architecture",
+    "submodule": "Module 3.2 \u2013 Securing Enterprise Infrastructure",
+    "lesson": "Intrusion Prevention"
+  },
+  {
+    "module": "Module 3 \u2013 Security Architecture",
+    "submodule": "Module 3.2 \u2013 Securing Enterprise Infrastructure",
+    "lesson": "Network Appliances"
+  },
+  {
+    "module": "Module 3 \u2013 Security Architecture",
+    "submodule": "Module 3.2 \u2013 Securing Enterprise Infrastructure",
+    "lesson": "Port Security"
+  },
+  {
+    "module": "Module 3 \u2013 Security Architecture",
+    "submodule": "Module 3.2 \u2013 Securing Enterprise Infrastructure",
+    "lesson": "Firewall Types"
+  },
+  {
+    "module": "Module 3 \u2013 Security Architecture",
+    "submodule": "Module 3.2 \u2013 Securing Enterprise Infrastructure",
+    "lesson": "Secure Communication"
+  },
+  {
+    "module": "Module 3 \u2013 Security Architecture",
+    "submodule": "Module 3.3 \u2013 Data Protection Strategies",
+    "lesson": "Data Types and Classifications"
+  },
+  {
+    "module": "Module 3 \u2013 Security Architecture",
+    "submodule": "Module 3.3 \u2013 Data Protection Strategies",
+    "lesson": "States of Data"
+  },
+  {
+    "module": "Module 3 \u2013 Security Architecture",
+    "submodule": "Module 3.3 \u2013 Data Protection Strategies",
+    "lesson": "Protecting Data"
+  },
+  {
+    "module": "Module 3 \u2013 Security Architecture",
+    "submodule": "Module 3.4 \u2013 Resilience and Recovery",
+    "lesson": "Resiliency"
+  },
+  {
+    "module": "Module 3 \u2013 Security Architecture",
+    "submodule": "Module 3.4 \u2013 Resilience and Recovery",
+    "lesson": "Recovery Testing"
+  },
+  {
+    "module": "Module 3 \u2013 Security Architecture",
+    "submodule": "Module 3.4 \u2013 Resilience and Recovery",
+    "lesson": "Power Resiliency"
+  },
+  {
+    "module": "Module 4 \u2013 Security Operations",
+    "submodule": "Module 4.1 \u2013 Common Security Techniques",
+    "lesson": "Secure Baselines"
+  },
+  {
+    "module": "Module 4 \u2013 Security Operations",
+    "submodule": "Module 4.1 \u2013 Common Security Techniques",
+    "lesson": "Hardening Targets"
+  },
+  {
+    "module": "Module 4 \u2013 Security Operations",
+    "submodule": "Module 4.1 \u2013 Common Security Techniques",
+    "lesson": "Securing Wireless and Mobile"
+  },
+  {
+    "module": "Module 4 \u2013 Security Operations",
+    "submodule": "Module 4.3 \u2013 Vulnerability Management",
+    "lesson": "Threat Intelligence"
+  },
+  {
+    "module": "Module 4 \u2013 Security Operations",
+    "submodule": "Module 4.3 \u2013 Vulnerability Management",
+    "lesson": "Penetration Testing"
+  },
+  {
+    "module": "Module 4 \u2013 Security Operations",
+    "submodule": "Module 4.4 \u2013 Security Alerting and Monitoring",
+    "lesson": "Security Monitoring"
+  },
+  {
+    "module": "Module 4 \u2013 Security Operations",
+    "submodule": "Module 4.4 \u2013 Security Alerting and Monitoring",
+    "lesson": "Security Tools"
+  },
+  {
+    "module": "Module 4 \u2013 Security Operations",
+    "submodule": "Module 4.5 \u2013 Enterprise Capabilities",
+    "lesson": "Firewalls"
+  },
+  {
+    "module": "Module 4 \u2013 Security Operations",
+    "submodule": "Module 4.5 \u2013 Enterprise Capabilities",
+    "lesson": "Operating System Security"
+  },
+  {
+    "module": "Module 4 \u2013 Security Operations",
+    "submodule": "Module 4.5 \u2013 Enterprise Capabilities",
+    "lesson": "Secure Protocols"
+  },
+  {
+    "module": "Module 4 \u2013 Security Operations",
+    "submodule": "Module 4.5 \u2013 Enterprise Capabilities",
+    "lesson": "Email Security"
+  },
+  {
+    "module": "Module 4 \u2013 Security Operations",
+    "submodule": "Module 4.5 \u2013 Enterprise Capabilities",
+    "lesson": "Monitoring Data"
+  },
+  {
+    "module": "Module 4 \u2013 Security Operations",
+    "submodule": "Module 4.5 \u2013 Enterprise Capabilities",
+    "lesson": "Endpoint Security"
+  },
+  {
+    "module": "Module 4 \u2013 Security Operations",
+    "submodule": "Module 4.6 \u2013 Identity and Access Management",
+    "lesson": "Identity and Access Management"
+  },
+  {
+    "module": "Module 4 \u2013 Security Operations",
+    "submodule": "Module 4.6 \u2013 Identity and Access Management",
+    "lesson": "Multifactor Authentication"
+  },
+  {
+    "module": "Module 4 \u2013 Security Operations",
+    "submodule": "Module 4.6 \u2013 Identity and Access Management",
+    "lesson": "Password Security"
+  },
+  {
+    "module": "Module 4 \u2013 Security Operations",
+    "submodule": "Module 4.7 \u2013 Automation and Orchestration",
+    "lesson": "Scripting and Automation"
+  },
+  {
+    "module": "Module 4 \u2013 Security Operations",
+    "submodule": "Module 4.8 \u2013 Incident Response Activities",
+    "lesson": "Incident Response"
+  },
+  {
+    "module": "Module 4 \u2013 Security Operations",
+    "submodule": "Module 4.8 \u2013 Incident Response Activities",
+    "lesson": "Incident Planning"
+  },
+  {
+    "module": "Module 4 \u2013 Security Operations",
+    "submodule": "Module 4.8 \u2013 Incident Response Activities",
+    "lesson": "Digital Forensics"
+  },
+  {
+    "module": "Module 4 \u2013 Security Operations",
+    "submodule": "Module 4.9 \u2013 Investigations and Data Sources",
+    "lesson": "Log Data"
+  },
+  {
+    "module": "Module 5 \u2013 Security Program Management and Oversight",
+    "submodule": "Module 5.1 \u2013 Security Governance",
+    "lesson": "Security Policies"
+  },
+  {
+    "module": "Module 5 \u2013 Security Program Management and Oversight",
+    "submodule": "Module 5.1 \u2013 Security Governance",
+    "lesson": "Security Standards"
+  },
+  {
+    "module": "Module 5 \u2013 Security Program Management and Oversight",
+    "submodule": "Module 5.1 \u2013 Security Governance",
+    "lesson": "Security Procedures"
+  },
+  {
+    "module": "Module 5 \u2013 Security Program Management and Oversight",
+    "submodule": "Module 5.1 \u2013 Security Governance",
+    "lesson": "Security Considerations"
+  },
+  {
+    "module": "Module 5 \u2013 Security Program Management and Oversight",
+    "submodule": "Module 5.1 \u2013 Security Governance",
+    "lesson": "Data Roles and Responsibilities"
+  },
+  {
+    "module": "Module 5 \u2013 Security Program Management and Oversight",
+    "submodule": "Module 5.2 \u2013 Risk Management Process",
+    "lesson": "Risk Analysis"
+  },
+  {
+    "module": "Module 5 \u2013 Security Program Management and Oversight",
+    "submodule": "Module 5.3 \u2013 Third-party Risk Assessment",
+    "lesson": "Third-party Risk Assessment"
+  },
+  {
+    "module": "Module 5 \u2013 Security Program Management and Oversight",
+    "submodule": "Module 5.4 \u2013 Security Compliance",
+    "lesson": "Privacy"
+  },
+  {
+    "module": "Module 5 \u2013 Security Program Management and Oversight",
+    "submodule": "Module 5.5 \u2013 Audits and Assessments",
+    "lesson": "Penetration Tests"
+  },
+  {
+    "module": "Module 5 \u2013 Security Program Management and Oversight",
+    "submodule": "Module 5.6 \u2013 Security Awareness Practices",
+    "lesson": "Security Awareness"
+  },
+  {
+    "module": "Module 5 \u2013 Security Program Management and Oversight",
+    "submodule": "Module 5.6 \u2013 Security Awareness Practices",
+    "lesson": "User Training"
+  }
+]
